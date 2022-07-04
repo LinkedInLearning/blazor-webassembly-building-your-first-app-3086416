@@ -1,0 +1,55 @@
+﻿@using MyBlazorShop.Libraries.Services.Product
+@using MyBlazorShop.Libraries.Services.Product.Models
+@using MyBlazorShop.Libraries.Services.ShoppingCart
+@using MyBlazorShop.Web.BlazorWasm.Shared.Layout
+@page "/product/{slug}"
+@inject IProductService productService
+@if (Product != null)
+{
+    <PageTitle>@Product.Name</PageTitle>
+}
+   <main class="margin-horizontal:auto max-width:container padding-horizontal:32">
+       <div id="vue-product-detail" class="quenched">
+           <div class="margin-bottom:32 @@mq-960--margin-top:32">
+               <div class="display:flex flex-wrap:wrap flex-grow:1 margin-bottom:-32 margin-horizontal:-16">
+                @if (Product == null)
+                {
+                    <div class="display:flex flex-direction:column flex-grow:0 flex-shrink:0 margin-bottom:32 padding-horizontal:16 width:100 @@mq-768--width:50">
+                        <p>Not found</p>
+                    </div>
+                }
+                else {
+                    <div class="display:flex flex-direction:column flex-grow:0 flex-shrink:0 margin-bottom:32 padding-horizontal:16 width:100 @@mq-768--width:50">
+                       <img src="images/@Product.Image" alt="Photo of @Product.Name" class="margin-bottom:32 max-width:100" />
+                   </div>
+                   <div class="display:flex flex-direction:column flex-grow:0 flex-shrink:0 margin-bottom:32 padding-horizontal:16 width:100 @@mq-768--width:50">
+                       <h1 class="font-weight:500 font-size:28 line-height:1_142 margin-bottom:24 @@mq-768--font-size:32 @@mq-768--line-height:1_125">@Product.Name</h1> 
+                       <p class="font-weight:500 font-size:28 line-height:1_142 margin-bottom:24">$@Product.Price.ToString("0.00")</p>                       
+                        @if (AllProducts != null)
+                        {
+                            <ul>
+                                @foreach (var product in AllProducts) {
+                                    <li><a href="@product.FullUrl">@product.Name</a></li>
+                                }
+                            </ul>
+                        }
+                    </div>               
+               }
+               </div>
+           </div>
+       </div>
+    </main>
+@code {
+    public ProductModel? Product { get; set; }
+
+    public IList<ProductModel>? AllProducts { get; set; }
+
+    public string? Slug { get; set; }
+
+    protected override void OnInitialized()
+    {
+        AllProducts = productService.GetAll();
+
+        base.OnInitialized();
+    }
+}
