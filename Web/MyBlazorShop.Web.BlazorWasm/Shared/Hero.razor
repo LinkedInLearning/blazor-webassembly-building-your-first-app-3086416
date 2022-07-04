@@ -1,0 +1,27 @@
+﻿@using MyBlazorShop.Web.BlazorWasm.Components
+@inherits PageInfoModel
+<div class="@@mq-768--margin-bottom:32 background-image:@BackgroundImage">
+    <div class="display:flex flex-direction:column @@mq-800--flex-direction:row align-items:center justify-content:space-between margin-horizontal:auto max-width:container padding-horizontal:32">
+        <div class="@@mq-800--margin-right:48 @@mq-800--width:60 line-height:1_375 padding-vertical:24">
+            <h1 class="font-weight:500 font-size:28 line-height:1_142 @@mq-800--font-size:40 @@mq-800--line-height:1_05 margin-bottom:16">@Title</h1>
+            @if (!string.IsNullOrWhiteSpace(Description))
+            {
+                <p>@Description</p>
+            }
+        </div>
+        @if (!string.IsNullOrWhiteSpace(Image))
+        {
+            <div>
+                <img alt="@Title" class="max-width:100 align-self:center justify-self:center" src="images/@Image">
+            </div>
+        }
+    </div> 
+</div>
+
+@code {
+    [Parameter]
+    public string? BackgroundImage { get; set; }
+
+    [Parameter]
+    public string? Image { get; set; }
+}
