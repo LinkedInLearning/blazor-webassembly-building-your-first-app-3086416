@@ -1,0 +1,27 @@
+﻿@using MyBlazorShop.Libraries.Services.Product
+@using MyBlazorShop.Libraries.Services.Product.Models
+@page "/"
+@inject IProductService productService
+<PageTitle>Product listings</PageTitle>
+<Hero Title="Shop" Description="Share your love of technology, and spread good cheer, with Binaryville official merchandise, including t-shirts, hats, mugs, aprons, posters, stickers, and more. Each unique treasure features a charming Binaryville robot, encapsulated inside a motivating historical quote, cleverly updated for the times. Even the most hard-to-please individuals can't resist these infectious designs. Perfect for the techie in your life!" Image="product-montage.png" BackgroundImage="shop-hero-yellow"></Hero>
+@if (Products?.Any() ?? false)
+{
+    <main class="margin-horizontal:auto max-width:container padding-horizontal:32">
+        <div id="vue-shop" class="margin-bottom:32 quenched">
+            <div class="display:flex flex-grow:1 flex-wrap:wrap margin-bottom:-32 margin-horizontal:-16">
+                <div class="display:flex flex-direction:column flex-grow:0 flex-shrink:0 margin-bottom:32 padding-horizontal:16 width:100 @@mq-768--width:100">
+                    <ul class="display:flex flex-grow:1 flex-wrap:wrap margin-bottom:-32 margin-horizontal:-16">
+                        @foreach(var product in Products)
+                        {
+                            <ProductListingItem Product="product"></ProductListingItem>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+}
+@code {
+        // Stores the product listing.
+    public IList<ProductModel>? Products { get; set; }
+}
