@@ -2,3 +2,8 @@
 node_modules
 .tmp
 npm-debug.log
+.vs
+bin
+obj
+logs
+*.log

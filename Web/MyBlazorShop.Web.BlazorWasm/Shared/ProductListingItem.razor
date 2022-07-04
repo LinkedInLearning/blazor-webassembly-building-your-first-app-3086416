@@ -1,0 +1,50 @@
+﻿@using MyBlazorShop.Libraries.Services.Product.Models;
+@using MyBlazorShop.Libraries.Services.ShoppingCart;
+@inject IShoppingCartService shoppingCartService
+@implements IProductAddToCart
+@if (Product != null)
+{
+    <li class="display:flex flex-direction:column flex-grow:0 flex-shrink:0 margin-bottom:32 padding-horizontal:16 width:100 @@mq-560--width:50 @@mq-800--width:33 @@mq-960--width:25">
+        <div class="display:flex flex-direction:column flex-grow:1">
+            <a href="@Product.FullUrl" class="group color:neutral-3a3a3d flex-grow:1 margin-bottom:16">
+                <span class="display:block margin-bottom:16 padding-bottom:100pc position:relative">
+                    <img alt="Photo of @Product.Name" src="images/@Product.Image" class="position:absolute max-width:100">
+                </span>
+                <h3 class="font-weight:500 font-size:20 group:hocus__color:orange-ff583d letter-spacing:1_2 margin-bottom:16">@Product.Name</h3>
+                <p class="line-height:1.166 font-size:24">$@Product.Price.ToString("0.00")</p>
+            </a>
+            <input type="text" placeholder="Quantity" name="Qty" @bind="Quantity" @bind:event="oninput" class="padding:12 &:hocus--border-color:neutral-000000 appearance:none background-color:neutral-ffffff border-color:neutral-4c5b5c border-radius:0 border-style:solid border-width:1 color:neutral-483e40 min-height:form-input width:100" />
+            <button @onclick="AddToCart" class="display:inline-block padding-horizontal:24 padding-horizontal:24 &amp;:hocus--background-color:yellow-f0c808 background-color:orange-ff583d color:neutral-222224 font-size:18 font-weight:700 line-height:1 margin-bottom:32 padding-vertical:12 padding-vertical:16">
+                @if (shoppingCartService.HasProduct(Product.Sku))
+                {
+                    <span>Added to cart. 
+                        @if (Quantity.HasValue) {
+                            <text>Add @Quantity more?</text>
+                        }
+                    </span>
+                }
+                else {
+                    <span>
+                        Add @Quantity to Cart?
+                    </span>
+                }
+            </button>
+        </div>
+    </li>
+}
+@code {
+    [Parameter]
+    public ProductModel? Product { get; set; }
+
+    public int? Quantity { get; set; }
+}
+@functions {
+    public void AddToCart()
+    {
+        if (Product != null)
+        {
+            shoppingCartService.AddProduct(Product, Quantity ?? 1);
+            Quantity = null;
+        }
+    }
+}

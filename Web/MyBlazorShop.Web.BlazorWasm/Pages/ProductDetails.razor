@@ -1,0 +1,90 @@
+﻿@using MyBlazorShop.Libraries.Services.Product
+@using MyBlazorShop.Libraries.Services.Product.Models
+@using MyBlazorShop.Libraries.Services.ShoppingCart
+@using MyBlazorShop.Web.BlazorWasm.Shared.Layout
+@page "/product/{slug}"
+@inject IProductService productService
+@inject IShoppingCartService shoppingCartService
+@if (Product != null)
+{
+    <PageTitle>@Product.Name</PageTitle>
+    <HeadContent>
+        <meta name="description" content="@Product.Name product page" />
+    </HeadContent>
+}
+   <main class="margin-horizontal:auto max-width:container padding-horizontal:32">
+       <div id="vue-product-detail" class="quenched">
+           <div class="margin-bottom:32 @@mq-960--margin-top:32">
+               <div class="display:flex flex-wrap:wrap flex-grow:1 margin-bottom:-32 margin-horizontal:-16">
+                @if (Product == null)
+                {
+                    <div class="display:flex flex-direction:column flex-grow:0 flex-shrink:0 margin-bottom:32 padding-horizontal:16 width:100 @@mq-768--width:50">
+                        <p>Not found</p>
+                    </div>
+                }
+                else {
+                    <div class="display:flex flex-direction:column flex-grow:0 flex-shrink:0 margin-bottom:32 padding-horizontal:16 width:100 @@mq-768--width:50">
+                       <img src="images/@Product.Image" alt="Photo of @Product.Name" class="margin-bottom:32 max-width:100" />
+                   </div>
+                   <div class="display:flex flex-direction:column flex-grow:0 flex-shrink:0 margin-bottom:32 padding-horizontal:16 width:100 @@mq-768--width:50">
+                       <h1 class="font-weight:500 font-size:28 line-height:1_142 margin-bottom:24 @@mq-768--font-size:32 @@mq-768--line-height:1_125">@Product.Name</h1> 
+                       <p class="font-weight:500 font-size:28 line-height:1_142 margin-bottom:24">$@Product.Price.ToString("0.00")</p>
+                        <div class="display:flex flex-wrap:wrap">
+                           <input type="text" placeholder="Quantity" name="Qty" class="padding:12 &:hocus--border-color:neutral-000000 appearance:none background-color:neutral-ffffff border-color:neutral-4c5b5c border-radius:0 border-style:solid border-width:1 color:neutral-483e40 min-height:form-input width:100" /> 
+                            <button class="display:inline-block padding-horizontal:24 padding-horizontal:24 &amp;:hocus--background-color:yellow-f0c808 background-color:orange-ff583d color:neutral-222224 font-size:18 font-weight:700 line-height:1 margin-bottom:32 padding-vertical:12 padding-vertical:16">
+                                @if (shoppingCartService.HasProduct(Product.Sku))
+                                {
+                                    <span>Added to cart. 
+                                        @if (Quantity.HasValue) {
+                                            <text>Add @Quantity more?</text>
+                                        }
+                                    </span>
+                                }
+                                else {
+                                    <span>
+                                        Add @Quantity to Cart?
+                                    </span>
+                                }
+                            </button>
+                       </div>
+                        @if (AllProducts != null)
+                        {
+                            <ul>
+                                @foreach (var product in AllProducts)
+                                {
+                                    <li><a href="@product.FullUrl">@product.Name</a></li>
+                                }
+                            </ul>
+                        }
+                   </div>               
+               }
+               </div>
+           </div>
+       </div>
+    </main>
+@code {
+    public ProductModel? Product { get; set; }
+
+    public int? Quantity { get; set; }
+
+    [Parameter]
+    public string? Slug { get; set; }
+
+    public IList<ProductModel>? AllProducts { get; set; }    
+}
+@functions {
+    protected override void OnInitialized()
+    {
+        AllProducts = productService.GetAll();
+
+        base.OnInitialized();
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (!string.IsNullOrWhiteSpace(Slug))
+        {
+            Product = productService.GetBySlug(Slug);
+        }        
+    }
+}
