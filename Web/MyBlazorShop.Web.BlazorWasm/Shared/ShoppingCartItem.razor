@@ -1,0 +1,31 @@
+﻿@using MyBlazorShop.Libraries.Services.ShoppingCart.Models
+@using MyBlazorShop.Libraries.Services.ShoppingCart
+@using MyBlazorShop.Libraries.Services.Product.Models
+@inject IShoppingCartService shoppingCartService
+@if (Item != null)
+{
+    <tr class="@@mq-upto-768--display:block @@mq-upto-768--border-top-color:neutral-979797 @@mq-upto-768--border-top-style:solid @@mq-upto-768--border-top-width:1 @@mq-upto-768--padding-horizontal:24 padding-bottom:4 padding-top:20">
+        <td class="padding-left:16 @@mq-upto-768--display:none padding-vertical:16 vertical-align:top"><img alt="Photo of It’s All 0’s and 1’s to Me! Apron, Black" src="/images/@Item.Product.Image" class="max-width:cart-image"></td>
+        <td class="padding:16 @@mq-upto-768--padding-left:cart-image @@mq-upto-768--padding-right:0 @@mq-upto-768--padding-vertical:0 position:relative"><img alt="Photo of It’s All 0’s and 1’s to Me! Apron, Black" src="/images/@Item.Product.Image" class="position:absolute pos-left:0 @@mq-768--display:none max-width:cart-image width:100"> <a href="@Item.Product.FullUrl" class="font-weight:500 font-size:20 &amp;:hocus--text-decoration:underline @@mq-upto-768--margin-left:20 color:blue-265f8e display:block margin-bottom:8">@Item.Product.Name</a></td>
+        <td class="@@mq-upto-768--display:block @@mq-upto-768--padding-left:cart-image @@mq-upto-768--padding-right:0 @@mq-upto-768--padding-vertical:0 padding:16"><span class="font-weight:500 @@mq-upto-768--margin-left:20 display:block @@mq-upto-768--margin-bottom:12 font-size:24">$@Item.Price.ToString("0.00")</span></td>
+        <td class="@@mq-upto-768--display:block @@mq-upto-768--padding-left:cart-image @@mq-upto-768--padding-right:0 @@mq-upto-768--padding-vertical:0 padding:16"><span class="font-weight:500 @@mq-upto-768--margin-left:20 display:block @@mq-upto-768--margin-bottom:12 font-size:24">@Item.Quantity</span></td>
+        <td class="@@mq-upto-768--display:block @@mq-upto-768--padding-left:cart-image @@mq-upto-768--padding-right:0 @@mq-upto-768--padding-vertical:0 padding:16"><span class="font-weight:500 @@mq-upto-768--margin-left:20 display:block @@mq-upto-768--margin-bottom:12 font-size:24 @@mq-upto-768--visually-hidden">$@Item.TotalPrice.ToString("0.00")</span></td>
+        <td class="@@mq-upto-768--display:block @@mq-upto-768--padding-left:cart-image @@mq-upto-768--padding-right:0 @@mq-upto-768--padding-vertical:0 padding:16 text-align:right">
+            <button type="button" @onclick="DeleteCartItem" aria-label="Remove @Item.Product.Name from your cart" class="display:inline-block @@mq-upto-768--margin-left:20 @@mq-upto-768--margin-top:-2 @@mq-upto-768--pos-left:136px @@mq-upto-768--pos-top:-30px group position:relative">Delete</button>
+        </td>
+    </tr>    
+}
+@code {
+    [Parameter]
+    public ShoppingCartItemModel? Item { get; set; }
+}
+@functions {
+    public void DeleteCartItem()
+    {
+        if (Item != null)
+        {
+            shoppingCartService.DeleteProduct(Item);
+            Item = null;
+        }
+    }
+}
