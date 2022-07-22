@@ -1,4 +1,5 @@
 ﻿@using MyBlazorShop.Web.BlazorWasm.Components
+@inherits PageInfoModel
 <div class="@@mq-768--margin-bottom:32 background-image:@BackgroundImage">
     <div class="display:flex flex-direction:column @@mq-800--flex-direction:row align-items:center justify-content:space-between margin-horizontal:auto max-width:container padding-horizontal:32">
         <div class="@@mq-800--margin-right:48 @@mq-800--width:60 line-height:1_375 padding-vertical:24">
@@ -23,10 +24,4 @@
 
     [Parameter]
     public string? Image { get; set; }
-
-    [Parameter]
-    public string? Title { get; set; }
-
-    [Parameter]
-    public string? Description { get; set; }
 }

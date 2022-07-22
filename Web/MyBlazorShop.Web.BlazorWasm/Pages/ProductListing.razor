@@ -1,5 +1,6 @@
 ﻿@using MyBlazorShop.Libraries.Services.Product
 @using MyBlazorShop.Libraries.Services.Product.Models
+@inject IProductService productService
 @page "/"
 <PageTitle>Product listings</PageTitle>
 <Hero Title="Shop" Description="Share your love of technology, and spread good cheer, with Binaryville official merchandise, including t-shirts, hats, mugs, aprons, posters, stickers, and more. Each unique treasure features a charming Binaryville robot, encapsulated inside a motivating historical quote, cleverly updated for the times. Even the most hard-to-please individuals can't resist these infectious designs. Perfect for the techie in your life!" Image="product-montage.png" BackgroundImage="@(BackgroundColor ?? "shop-hero-yellow")"></Hero>
@@ -30,6 +31,6 @@
     protected override void OnInitialized()
     {
         // Get all products
-        //Products = productService.GetAll();
+        Products = productService.GetAll();
     }
 }

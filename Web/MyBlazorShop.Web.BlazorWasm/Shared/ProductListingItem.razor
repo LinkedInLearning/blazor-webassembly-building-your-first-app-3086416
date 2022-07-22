@@ -1,6 +1,7 @@
 ﻿@using MyBlazorShop.Libraries.Services.Product.Models;
 @using MyBlazorShop.Libraries.Services.ShoppingCart;
 @inject IShoppingCartService shoppingCartService
+@implements IProductAddToCart
 @if (Product != null)
 {
     <li class="display:flex flex-direction:column flex-grow:0 flex-shrink:0 margin-bottom:32 padding-horizontal:16 width:100 @@mq-560--width:50 @@mq-800--width:33 @@mq-960--width:25">

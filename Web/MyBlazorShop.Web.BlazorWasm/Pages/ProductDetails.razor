@@ -67,8 +67,10 @@
     [Parameter]
     public string? Slug { get; set; }
 
-    public IList<ProductModel>? AllProducts { get; set; }
+    public IList<ProductModel>? AllProducts { get; set; }    
+}
 
+@functions {
     protected override void OnInitialized()
     {
         AllProducts = productService.GetAll();
