@@ -44,12 +44,26 @@
 
     public IList<ProductModel>? AllProducts { get; set; }
 
+    [Parameter]
     public string? Slug { get; set; }
 
     protected override void OnInitialized()
     {
         AllProducts = productService.GetAll();
 
+
+
         base.OnInitialized();
     }
+
+    protected override void OnParametersSet()
+    {
+        if (!string.IsNullOrWhiteSpace(Slug))
+        {
+            Product = productService.GetBySlug(Slug);
+        }
+
+        base.OnParametersSet();
+    }
+
 }
