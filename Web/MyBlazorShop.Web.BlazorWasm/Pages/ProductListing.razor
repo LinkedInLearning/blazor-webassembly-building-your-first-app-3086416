@@ -2,6 +2,10 @@
 @using MyBlazorShop.Libraries.Services.Product.Models
 @page "/"
 @inject IProductService productService
+<PageTitle>Product listing page</PageTitle>
+<HeadContent>
+    <meta name="description" content="This is the product listing page" />
+</HeadContent>
 <Hero Title="Shop" Description="Share your love of technology, and spread good cheer, with Binaryville official merchandise, including t-shirts, hats, mugs, aprons, posters, stickers, and more. Each unique treasure features a charming Binaryville robot, encapsulated inside a motivating historical quote, cleverly updated for the times. Even the most hard-to-please individuals can't resist these infectious designs. Perfect for the techie in your life!" Image="product-montage.png" BackgroundImage="@(BackgroundColor ?? "shop-hero-yellow")"></Hero>
 @if (Products?.Any() ?? false)
 {
