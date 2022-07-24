@@ -30,8 +30,8 @@
                        <h1 class="font-weight:500 font-size:28 line-height:1_142 margin-bottom:24 @@mq-768--font-size:32 @@mq-768--line-height:1_125">@Product.Name</h1> 
                        <p class="font-weight:500 font-size:28 line-height:1_142 margin-bottom:24">$@Product.Price.ToString("0.00")</p>
                         <div class="display:flex flex-wrap:wrap">
-                           <input type="text" placeholder="Quantity" name="Qty" class="padding:12 &:hocus--border-color:neutral-000000 appearance:none background-color:neutral-ffffff border-color:neutral-4c5b5c border-radius:0 border-style:solid border-width:1 color:neutral-483e40 min-height:form-input width:100" /> 
-                            <button class="display:inline-block padding-horizontal:24 padding-horizontal:24 &amp;:hocus--background-color:yellow-f0c808 background-color:orange-ff583d color:neutral-222224 font-size:18 font-weight:700 line-height:1 margin-bottom:32 padding-vertical:12 padding-vertical:16">
+                           <input @bind="Quantity" @bind:event="oninput" type="text" placeholder="Quantity" name="Qty" class="padding:12 &:hocus--border-color:neutral-000000 appearance:none background-color:neutral-ffffff border-color:neutral-4c5b5c border-radius:0 border-style:solid border-width:1 color:neutral-483e40 min-height:form-input width:100" /> 
+                            <button @onclick="AddToCart" class="display:inline-block padding-horizontal:24 padding-horizontal:24 &amp;:hocus--background-color:yellow-f0c808 background-color:orange-ff583d color:neutral-222224 font-size:18 font-weight:700 line-height:1 margin-bottom:32 padding-vertical:12 padding-vertical:16">
                                 @if (shoppingCartService.HasProduct(Product.Sku))
                                 {
                                     <span>Added to cart. 
@@ -86,5 +86,14 @@
         {
             Product = productService.GetBySlug(Slug);
         }        
+    }
+
+    public void AddToCart()
+    {
+        if (Product != null)
+        {
+            shoppingCartService.AddProduct(Product, Quantity ?? 1);
+            Quantity = null;
+        }
     }
 }
