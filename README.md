@@ -1,7 +1,10 @@
 # Blazor WebAssembly: Building Your First App
 This is the repository for the LinkedIn Learning course Blazor WebAssembly: Building Your First App. The full course is available from [LinkedIn Learning][lil-course-url].
 
-_See the readme file in the main branch for updated instructions and information._
+![Blazor WebAssembly: Building Your First App][lil-thumbnail-url] 
+
+Blazor WebAssembly, from Microsoft, empowers you to start building web applications. In this quick course, David Grace helps you build a foundational understanding of Blazor, then takes you through building your first web application, as well as creating and effectively using Razor components. David goes over the history of Blazor, then explains Blazor hosting models, WebAssembly, and why you should use Blazor WebAssembly over other web frameworks. He covers how to create a Blazor WebAssembly application in Visual Studio and how a Blazor WebAssembly works. Next, David shows you how to create a Razor component and discusses code blocks, parameters, data binding, event handling, and more. Plus, David presents a basic web application challenge, so that you can showcase what you have learned.
+
 ## Instructions
 This repository has branches for each of the videos in the course. You can use the branch pop up menu in github to switch to a specific branch and take a look at the course at that stage, or you can add `/tree/BRANCH_NAME` to the URL to go to the branch you want to access.
 
@@ -27,8 +30,15 @@ To resolve this issue:
 3. [Course-specific instructions]
 
 
-[0]: # (Replace these placeholder URLs with actual course URLs)
+### Instructor
 
-[lil-course-url]: https://www.linkedin.com/learning/
-[lil-thumbnail-url]: http://
+David Grace 
+                            
 
+
+                            
+
+Check out my other courses on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/david-grace).
+
+[lil-course-url]: https://www.linkedin.com/learning/blazor-webassembly-building-your-first-app
+[lil-thumbnail-url]: https://cdn.lynda.com/course/3086416/3086416-1661366903227-16x9.jpg
