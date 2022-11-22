@@ -1,0 +1,33 @@
+﻿@using MyBlazorShop.Libraries.Services.ShoppingCart
+@page "/cart"
+@inject IShoppingCartService shoppingCartService
+<PageTitle>Shopping cart</PageTitle>
+<HeadContent>
+    <meta name="description" content="Shopping cart page" />
+</HeadContent>
+<div id="vue-cart" class="quenched">
+    <main class="margin-horizontal:auto max-width:container padding-horizontal:32">
+        <div>
+            <h1 class="font-weight:500 @@mq-960--margin-bottom:24 color:blue-265f8e font-size:36 line-height:1_222 margin-bottom:12 margin-top:24">Cart</h1>
+            <div class="display:flex flex-direction:column color:blue-265f8e margin-bottom:12">
+                <table class="@@mq-upto-768--display:block @@mq-upto-768--margin-horizontal:-24">
+                    <thead class="@@mq-upto-768--visually-hidden">
+                        <tr>
+                            <th colspan="2" scope="col" class="border-bottom-style:solid border-bottom-width:1 border-bottom-color:neutral-979797 color:neutral-4c5b5c font-size:20 font-weight:400 padding-bottom:12 padding-horizontal:20 text-align:left">Product</th>
+                            <th scope="col" class="border-bottom-style:solid border-bottom-width:1 border-bottom-color:neutral-979797 color:neutral-4c5b5c font-size:20 font-weight:400 padding-bottom:12 padding-horizontal:20 text-align:left">Price</th>
+                            <th scope="col" class="border-bottom-style:solid border-bottom-width:1 border-bottom-color:neutral-979797 color:neutral-4c5b5c font-size:20 font-weight:400 padding-bottom:12 padding-horizontal:20 text-align:left">Quantity</th>
+                            <th scope="col" class="border-bottom-style:solid border-bottom-width:1 border-bottom-color:neutral-979797 color:neutral-4c5b5c font-size:20 font-weight:400 padding-bottom:12 padding-horizontal:20 text-align:left">Total</th>
+                            <th scope="col" class="border-bottom-style:solid border-bottom-width:1 border-bottom-color:neutral-979797 color:neutral-4c5b5c font-size:20 font-weight:400 padding-bottom:12 padding-horizontal:20 text-align:left"><span class="visually-hidden">Remove</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="@@mq-upto-768--display:block">
+                        @foreach (var item in shoppingCartService.Get().Items)
+                        {
+                            <ShoppingCartItem Item="item"></ShoppingCartItem>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>

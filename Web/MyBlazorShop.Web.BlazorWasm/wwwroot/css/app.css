@@ -1,0 +1,39 @@
+﻿#blazor-error-ui {
+    display: none;
+    padding: 15px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    background-color: #ff583d;
+    color: #222224;
+    font-weight:500;
+}
+header {
+    min-width:450px;
+    overflow-x:auto;
+}
+.links {
+    margin-right:8px;
+}
+.links a {
+    font-weight: 500;
+    color: #3a3a3d;
+    font-size: 18px;
+    padding: 12px;
+}
+.links a.active {
+    text-decoration: underline;
+    color: #ff583d;
+}
+
+.nav-link {
+    font-weight:500;
+    color: #3a3a3d;
+    font-size:18px;
+    padding: 12px;
+}
+.nav-link.active {
+    text-decoration:underline;
+    color: #ff583d;
+}
